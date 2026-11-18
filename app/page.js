@@ -1,69 +1,101 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
 
 export default function Home() {
+  const [point, setPoint] = useState(0);
+  const [isOn, setIsOn] = useState(false);
+  const [isLocked, setIsLocked] = useState(true);
+  let bgcolor = "";
+  let color = "";
+  if (isOn === false) {
+    bgcolor = "bg-slate-800";
+    color = "text-white";
+  } else {
+    bgcolor = "bg-amber-100";
+    color = "text-slate-800";
+  }
+  let undur = "";
+  if (isLocked === true) {
+    undur = "h-[500px]";
+  } else {
+    undur = "h-[700px]";
+  }
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.js
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="w-100% h-[1500px]  bg-gray-300 flex flex-col items-center gap-[20px]">
+      <div className=" w-[200px] h-[120px] text-[42px] font-bold text-slate-800 flex items-center justify-center">
+        <h1>useState</h1>
+      </div>
+      <div className="flex gap-[40px] h-[600px] items-center justify-center">
+        <div className="h-[500px] w-[550px] bg-white rounded-[32px] ">
+          <div className="h-[360px] w-100% flex flex-col items-center justify-around ">
+            <h1 className="text-[42px] text-slate-800 font-semibold">
+              🔢 Тоолуур
+            </h1>
+            <h1 className="text-[112px] text-black font-bold">{point}</h1>
+          </div>
+          <div className="h-[140px] w100% flex justify-center items-start gap-[40px]">
+            <button
+              className="h-[100px] w-[100px] bg-slate-800 rounded-full text-[42px]"
+              onClick={() => {
+                setPoint(point - 1);
+              }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              -
+            </button>
+            <button
+              className="h-[100px] w-[100px] bg-slate-800 rounded-full text-[42px]"
+              onClick={() => {
+                setPoint(point + 1);
+              }}
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              +
+            </button>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className={`h-[500px] w-[550px] ${bgcolor} rounded-[32px]`}>
+          <div className="h-[320px] w-100% flex flex-col items-center justify-around">
+            <h1 className={`text-[42px] ${color} font-semibold`}>💡 Гэрэл</h1>
+            <h1 className="text-[112px] text-black font-bold">
+              {isOn === true ? "💡" : "🌑"}
+            </h1>
+          </div>
+          <div className="h-[180px] w-100% flex justify-center items-center">
+            <button
+              className="h-[100px] w-[200px] bg-amber-300 rounded-[24px] text-[32px] text-slate-800 font-semibold "
+              onClick={() => {
+                setIsOn(!isOn);
+              }}
+            >
+              {isOn === true ? "Унтраах" : "Асаах"}
+            </button>
+          </div>
         </div>
-      </main>
+        <div className={`${undur} w-[550px] bg-white rounded-[32px]`}>
+          <div className="h-[320px] w-100% flex flex-col items-center justify-around">
+            <h1 className="text-[42px] text-slate-800 font-semibold">
+              🔒 Нууц мессеж
+            </h1>
+            <h1 className="text-[112px] text-black font-bold">
+              {isLocked === true ? "🔒" : "🔓"}
+            </h1>
+          </div>
+          <div className=" w-100% flex flex-col justify-center items-center gap-[50px]">
+            <button
+              className="h-[100px] w-[200px] bg-purple-600 rounded-[24px] text-[32px] text-white font-semibold "
+              onClick={() => {
+                setIsLocked(!isLocked);
+              }}
+            >
+              {isLocked === true ? "Харах" : "Нуух"}
+            </button>
+            {!isLocked && (
+              <div className="h-[180px] w-[500px] bg-pink-300 flex items-center justify-center text-slate-800 text-[32px] font-bold rounded-[24px]">
+                🎉 Чи useState-ийг ойлголоо!
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
